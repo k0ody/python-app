@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pyhton-app
+  labels:
+    app: pyhton-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pyhton-app
+  template:
+    metadata:
+      labels:
+        app: pyhton-app
+    spec:
+      containers:
+      - name: pyhton-app
+        image: k0dy/python-app:v1
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000
