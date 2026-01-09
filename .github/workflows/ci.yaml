@@ -1,0 +1,26 @@
+name: ci
+on:
+    push:
+        paths:
+            - 'src/**'
+        branches:
+            - main
+jobs:
+    docker:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+
+            - name: Log in to Docker Hub
+              uses: docker/login-action@v2
+              with:
+                  username: ${{ secrets.DOCKER__HUB_ACESS_TOKEN }}
+                  password: ${{ secrets.DOCKER_HUB_PASSWORD }}
+
+            - name: Build and push Docker image
+              uses: docker/build-push-action@v4
+              with:
+                  context: .
+                  push: true
+                  tags: k0dy/python-app:${{ github.sha::6 }}
