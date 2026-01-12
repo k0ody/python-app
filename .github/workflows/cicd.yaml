@@ -29,10 +29,27 @@ jobs:
                   context: .
                   push: true
                   tags: k0dy/python-app:${{ env.COMMIT_ID }}
+        outputs:
+          commit_id: ${{ env.COMMIT_ID }}
     cd:
         needs: ci
         runs-on: self-hosted
         steps:
+            - name: Checkout repository
+              uses: actions/checkout@v3
+              
+            - name: Modify values file
+              shell: bash
+              run: |
+                echo ${{needs.ci.outputs.commit_id}}
+                pip install yq
+                yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
+
+            - name: Commit Changes
+              uses: EndBug/add-and-commit@v9
+              with:
+                message: "ci: update image tag to ${{needs.ci.outputs.commit_id}}"
+                
             - name: Install Argocd CLI
               shell: bash
               run: |
