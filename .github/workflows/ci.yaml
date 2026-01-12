@@ -14,7 +14,7 @@ jobs:
 
             - name: Shortem commit hash
               shell: bash
-              run: echo "COMMIT_ID=${ GITHUB_SHA::6 }}" >> "$GITHUB_ENV"
+              run: echo "COMMIT_ID=${ GITHUB_SHA::6 }" >> "$GITHUB_ENV"
             
             - name: Log in to Docker Hub
               uses: docker/login-action@v3
