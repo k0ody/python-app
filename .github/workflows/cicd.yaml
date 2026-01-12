@@ -45,8 +45,7 @@ jobs:
 
                 echo "$HOME/bin" >> $GITHUB_PATH
 
-                argocd version
-
+                
             - name: Login Argocd Application
               shell: bash
               run: |
