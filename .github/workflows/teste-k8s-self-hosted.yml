@@ -1,0 +1,19 @@
+name: Teste Self Hosted
+on:
+  workflow_dispatch:
+
+jobs:
+  test-k8s:
+    runs-on: self-hosted # <--- Isso direciona para o seu cluster Kind
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Verificando onde estou rodando
+        run: |
+          echo "Rodando dentro do Kubernetes!"
+          hostname
+          uname -a
+      
+      - name: Testando Docker dentro do Runner
+        run: docker run hello-world
