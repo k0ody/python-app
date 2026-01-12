@@ -36,9 +36,15 @@ jobs:
             - name: Install Argocd CLI
               shell: bash
               run: |
-                curl -sSL -o /usr/local/bin/argocd https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
-                chmod +x /usr/local/bin/argocd
-                      
+                mkdir -p $HOME/bin
+
+                curl -sSL -o $HOME/bin/argocd \
+                  https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+
+                chmod +x $HOME/bin/argocd
+
+                echo "$HOME/bin" >> $GITHUB_PATH
+
             - name: Login Argocd Application
               shell: bash
               run: |
