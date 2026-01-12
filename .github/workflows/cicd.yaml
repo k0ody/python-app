@@ -1,4 +1,4 @@
-name: ci
+name: cicd
 on:
     push:
         paths:
@@ -6,7 +6,7 @@ on:
         branches:
             - main
 jobs:
-    docker:
+    ci:
         runs-on: ubuntu-latest
         steps:
             - name: Checkout repository
@@ -29,3 +29,18 @@ jobs:
                   context: .
                   push: true
                   tags: k0dy/python-app:${{ env.COMMIT_ID }}
+    cd:
+        needs: ci
+        runs-on: self-hosted
+        steps:
+            - name: Login Argocd Application
+              shell: bash
+              run: |
+                argocd login \ 
+                --insecure \ 
+                --username ${{ secrets.ARGOCD_USERNAME }} \ 
+                --password ${{ secrets.ARGOCD_PASSWORD }} ${{  secrets.ARGOCD_SERVER }}
+            - name: Sync Argocd Application
+              shell: bash
+              run: |
+                argocd app sync python-app

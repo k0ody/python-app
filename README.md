@@ -20,6 +20,11 @@ kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.pas
   instalar via helm passando o token
 
   applicar runnerdeploy
-  
+
+
+Fazer login no argocd cli
+
+  argocd login <nome do servidor> --insecure --grpc-web --username admin --password <senha>
+
 
   
