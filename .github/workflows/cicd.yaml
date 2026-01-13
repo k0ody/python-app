@@ -37,13 +37,22 @@ jobs:
         steps:
             - name: Checkout repository
               uses: actions/checkout@v3
-              
-            - name: Modify values file
-              shell: bash
+
+            - name: Setup yq
               run: |
-                echo ${{needs.ci.outputs.commit_id}}
-                pip install yq
-                yq -Yi '.image.tag = "${{needs.ci.outputs.commit_id}}"' charts/python-app/values.yaml
+                YQ_VERSION=v4.44.3
+                curl -sSL https://github.com/mikefarah/yq/releases/download/${YQ_VERSION}/yq_linux_amd64 \
+                 -o /usr/local/bin/yq
+                chmod +x /usr/local/bin/yq
+            - name: Modify values file
+              run: |
+                echo "Commit: ${{ needs.ci.outputs.commit_id }}"
+                yq -i '.image.tag = "${{ needs.ci.outputs.commit_id }}"' charts/python-app/values.yaml
+
+            
+            - name: Check values.yaml
+              run: |
+                cat charts/python-app/values.yaml
 
             - name: Commit Changes
               uses: EndBug/add-and-commit@v9
