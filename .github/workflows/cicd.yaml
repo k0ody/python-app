@@ -41,8 +41,9 @@ jobs:
             - name: Setup yq
               run: |
                 # Baixa o binário oficial (muito mais rápido que instalar pip)
-                sudo wget https://github.com/mikefarah/yq/releases/download/v4.40.5/yq_linux_amd64 -O /usr/bin/yq
+                sudo curl -L https://github.com/mikefarah/yq/releases/download/v4.40.5/yq_linux_amd64 -o /usr/bin/yq
                 sudo chmod +x /usr/bin/yq
+            
             - name: Modify values file
               run: |
                 echo "Commit: ${{ needs.ci.outputs.commit_id }}"
