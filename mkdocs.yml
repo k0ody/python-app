@@ -1,0 +1,10 @@
+site_name: python app
+site_description: Documentation for python app
+repo_url: https://github.com/k0ody/python-app
+edit_uri: edit/main/docs/
+
+plugins:
+  - techdocs-core
+nav:
+  - Overview: 
+      - Getting Started: index.md
