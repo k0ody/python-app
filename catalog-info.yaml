@@ -5,7 +5,7 @@ metadata:
   description: "pythons app that dispays time."
   annotations:
     github.com/project-slug: k0ody/python-app
- 
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   owner: development
