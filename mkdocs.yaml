@@ -7,4 +7,4 @@ plugins:
   - techdocs-core
 nav:
   - Overview: 
-      - Getting Started: `docs/index.md`
+      - Getting Started: index.md
