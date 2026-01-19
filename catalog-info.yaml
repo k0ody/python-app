@@ -2,7 +2,7 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: python-app
-  description: pythons app that dispays time.
+  description: "pythons app that dispays time."
     annotations:
       github.com/project-slug: k0ody/python-app
  
