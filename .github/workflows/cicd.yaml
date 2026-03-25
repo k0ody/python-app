@@ -63,28 +63,28 @@ jobs:
               with:
                 message: "ci: update image tag to ${{needs.ci.outputs.commit_id}}"
                 
-            - name: Install Argocd CLI
-              shell: bash
-              run: |
-                mkdir -p $HOME/bin
+            #- name: Install Argocd CLI
+             # shell: bash
+              #run: |
+               # mkdir -p $HOME/bin
 
-                curl -sSL -o $HOME/bin/argocd \
-                  https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
+                #curl -sSL -o $HOME/bin/argocd \
+                 # https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
 
-                chmod +x $HOME/bin/argocd
+                #chmod +x $HOME/bin/argocd
 
-                echo "$HOME/bin" >> $GITHUB_PATH
+                #echo "$HOME/bin" >> $GITHUB_PATH
 
                 
-            - name: Login Argocd Application
-              shell: bash
-              run: |
-                argocd login ${{ secrets.ARGOCD_SERVER }} \
-                --grpc-web \
-                --insecure \
-                --username ${{ secrets.ARGOCD_USERNAME }} \
-                --password ${{ secrets.ARGOCD_PASSWORD }}
-            - name: Sync Argocd Application
-              shell: bash
-              run: |
-                argocd app sync python-app
+            #- name: Login Argocd Application
+             # shell: bash
+              #run: |
+               # argocd login ${{ secrets.ARGOCD_SERVER }} \
+                #--grpc-web \
+                #--insecure \
+                #--username ${{ secrets.ARGOCD_USERNAME }} \
+                #--password ${{ secrets.ARGOCD_PASSWORD }}
+            #- name: Sync Argocd Application
+              #shell: bash
+              #run: |
+                #argocd app sync python-app
