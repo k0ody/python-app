@@ -1,0 +1,32 @@
+{{- if .Values.canary.enabled -}}
+apiVersion: flagger.app/v1beta1
+kind: Canary
+metadata:
+  # O include fullname garante que o Canary tenha o mesmo nome do seu Deployment
+  name: {{ include "python-app.fullname" . }}
+  labels:
+    {{- include "python-app.labels" . | nindent 4 }}
+spec:
+  targetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "python-app.fullname" . }}
+  service:
+    # Ele puxa a porta do seu values.yaml para garantir que o Istio olhe pro lugar certo
+    port: {{ .Values.service.port }}
+    targetPort: {{ default .Values.service.port .Values.service.targetPort }}
+  analysis:
+    interval: {{ .Values.canary.analysis.interval }}
+    threshold: {{ .Values.canary.analysis.threshold }}
+    maxWeight: {{ .Values.canary.analysis.maxWeight }}
+    stepWeight: {{ .Values.canary.analysis.stepWeight }}
+    metrics:
+    - name: request-success-rate
+      thresholdRange:
+        min: {{ .Values.canary.analysis.successRateMin }}
+      interval: 1m
+    - name: request-duration
+      thresholdRange:
+        max: {{ .Values.canary.analysis.durationMax }}
+      interval: 30s
+{{- end }}

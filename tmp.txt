@@ -1,0 +1,30 @@
+.
+├── catalog-info.yaml
+├── charts
+│   ├── argocd
+│   │   └── values-argo.yaml
+│   └── python-app
+│       ├── Chart.yaml
+│       ├── templates
+│       │   ├── deployment.yaml
+│       │   ├── _helpers.tpl
+│       │   ├── httproute.yaml
+│       │   ├── ingress.yaml
+│       │   ├── NOTES.txt
+│       │   └── service.yaml
+│       └── values.yaml
+├── Dockerfile
+├── docs
+│   └── index.md
+├── k8s
+│   ├── deploy.yaml
+│   ├── ingress.yaml
+│   └── service.yaml
+├── mkdocs.yml
+├── README.md
+├── requirements.txt
+├── src
+│   └── app.py
+└── tmp.txt
+
+8 directories, 20 files

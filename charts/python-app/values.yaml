@@ -149,3 +149,15 @@ volumeMounts: []
 nodeSelector: {}
 tolerations: []
 affinity: {}
+
+
+canary:
+  # Chave mestra: Se false, o Helm nem cria o arquivo Canary no cluster
+  enabled: true
+  analysis:
+    interval: 30s
+    threshold: 5
+    maxWeight: 50
+    stepWeight: 10
+    successRateMin: 99
+    durationMax: 500
