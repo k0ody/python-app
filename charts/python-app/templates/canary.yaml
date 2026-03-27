@@ -14,7 +14,7 @@ spec:
   service:
     # Ele puxa a porta do seu values.yaml para garantir que o Istio olhe pro lugar certo
     port: {{ .Values.service.port }}
-    targetPort: {{ default .Values.service.port .Values.service.targetPort }}
+    targetPort: {{ .Values.container.port }}
   analysis:
     interval: {{ .Values.canary.analysis.interval }}
     threshold: {{ .Values.canary.analysis.threshold }}
